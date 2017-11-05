@@ -2,13 +2,13 @@
   name: Media Manager
   version: 1.0.0
   description: Media manager
-  uuid: media-1
+  uuid: media-0
   questions:
   - variable: "CONFIG_DIR"
       label: "Configuration location"
       description: |
         The local folder on the host to store the configuration in.
-		Each application will be stored in a subfolder of this one.
+        Each application will be stored in a subfolder of this one.
       type: "string"
       default: "/data/config"
       required: true
