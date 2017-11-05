@@ -113,7 +113,6 @@ services:
     lb_config:
       certs: []
       port_rules:
-      - hostname: "sonarr.${DOMAIN}"
-        service: sonarr
+      - service: sonarr
         source_port: 80
         target_port: 8989
