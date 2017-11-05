@@ -228,8 +228,6 @@ services:
     - 139:139/tcp
     - 445:445/tcp
     command:
-    - -t
-    - EST5EDT
     - -n
     - -s
     - books;/media/books;yes;yes;yes
