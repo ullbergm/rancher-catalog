@@ -4,7 +4,7 @@
   description: Media manager
   uuid: media-0
   questions:
-  - variable: "CONFIG_DIR"
+    - variable: "CONFIG_DIR"
       label: "Configuration location"
       description: |
         The local folder on the host to store the configuration in.
@@ -12,14 +12,14 @@
       type: "string"
       default: "/data/config"
       required: true
-  - variable: "DOWNLOAD_DIR"
+    - variable: "DOWNLOAD_DIR"
       label: "Download location"
       description: |
         The local folder on the host to store the downloaded files before they are processed.
       type: "string"
       default: "/data/downloads"
       required: true
-  - variable: "PGID"
+    - variable: "PGID"
       label: "GID"
       description: |
         The GID to run the tools with.
@@ -28,7 +28,7 @@
       min: 1
       max: 65535
       required: true
-  - variable: "PUID"
+    - variable: "PUID"
       label: "UID"
       description: |
         The UID to run the tools with.
@@ -37,56 +37,56 @@
       min: 1
       max: 65535
       required: true
-  - variable: "TZ"
+    - variable: "TZ"
       label: "Timezone"
       description: |
         The timezone you want to use.
       type: "string"
       default: "America/New_York"
       required: true
-  - variable: "VPN_LAN_NETWORK"
+    - variable: "VPN_LAN_NETWORK"
       label: "LAN Network range"
       description: |
         The LAN network range.
       type: "string"
       default: "192.168.0.0/16"
       required: true
-  - variable: "VPN_NAME_SERVERS"
+    - variable: "VPN_NAME_SERVERS"
       label: "VPN Name Servers"
       description: |
         The nameservers you want to use for the VPN.
       type: "string"
       default: "8.8.8.8, 8.8.4.4"
       required: true
-  - variable: "VPN_STRICT_PORT_FORWARD"
+    - variable: "VPN_STRICT_PORT_FORWARD"
       label: "VPN Strict Port Forward"
       description: |
         Enable Strict Port Forward for the VPN.
       type: "boolean"
       default: "true"
       required: true
-  - variable: "VPN_USER"
+    - variable: "VPN_USER"
       label: "VPN Username"
       description: |
         The VPN username you want to use.
       type: "string"
       default: ""
       required: true
-  - variable: "VPN_PASS"
+    - variable: "VPN_PASS"
       label: "VPN Password"
       description: |
         The password for the VPN.
       type: "string"
       default: ""
       required: true
-  - variable: "VPN_PROV"
+    - variable: "VPN_PROV"
       label: "VPN Provider"
       description: |
         The VPN provider you want to use.
       type: "string"
       default: "pia"
       required: true
-  - variable: "VPN_REMOTE"
+    - variable: "VPN_REMOTE"
       label: "VPN Remote"
       description: |
         The VPN remote host you want to use.
