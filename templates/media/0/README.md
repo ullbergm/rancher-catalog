@@ -7,7 +7,20 @@
 
 The templates uses many community provided docker images.
 
+- booksonic
+- deluge
+- embyserver
+- headphones
+- lazylibrarian
+- mylar
 - nzbget
+- nzbhydra
+- organizr
+- radarr
+- samba
+- smokeping
+- sonarr
+- ubooquity 
 
 ### Usage:
 
