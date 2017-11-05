@@ -42,54 +42,54 @@
       description: |
         The timezone you want to use.
       type: "string"
-	  default: "America/New_York"
+      default: "America/New_York"
       required: true
   - variable: "VPN_LAN_NETWORK"
       label: "LAN Network range"
       description: |
         The LAN network range.
       type: "string"
-	  default: "192.168.0.0/16"
+      default: "192.168.0.0/16"
       required: true
   - variable: "VPN_NAME_SERVERS"
       label: "VPN Name Servers"
       description: |
         The nameservers you want to use for the VPN.
       type: "string"
-	  default: "8.8.8.8, 8.8.4.4"
+      default: "8.8.8.8, 8.8.4.4"
       required: true
   - variable: "VPN_STRICT_PORT_FORWARD"
       label: "VPN Strict Port Forward"
       description: |
         Enable Strict Port Forward for the VPN.
       type: "boolean"
-	  default: "true"
+      default: "true"
       required: true
   - variable: "VPN_USER"
       label: "VPN Username"
       description: |
         The VPN username you want to use.
       type: "string"
-	  default: ""
+      default: ""
       required: true
   - variable: "VPN_PASS"
       label: "VPN Password"
       description: |
         The password for the VPN.
       type: "string"
-	  default: ""
+      default: ""
       required: true
   - variable: "VPN_PROV"
       label: "VPN Provider"
       description: |
         The VPN provider you want to use.
       type: "string"
-	  default: "pia"
+      default: "pia"
       required: true
   - variable: "VPN_REMOTE"
       label: "VPN Remote"
       description: |
         The VPN remote host you want to use.
       type: "string"
-	  default: ""
+      default: ""
       required: true
