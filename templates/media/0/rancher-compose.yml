@@ -4,6 +4,13 @@
   description: Media manager
   uuid: media-0
   questions:
+    - variable: "DOMAIN"
+      label: "Local domain"
+      description: |
+        The local domain to use, each service will be hosted on servicename.local-domain.
+      type: "string"
+      default: ""
+      required: true
     - variable: "CONFIG_DIR"
       label: "Configuration location"
       description: |
@@ -11,6 +18,13 @@
         Each application will be stored in a subfolder of this one.
       type: "string"
       default: "/data/config"
+      required: true
+    - variable: "MEDIA_DIR"
+      label: "Media location"
+      description: |
+        The local folder on the host to store the media in.
+      type: "string"
+      default: "/data/media"
       required: true
     - variable: "DOWNLOAD_DIR"
       label: "Download location"
