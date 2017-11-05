@@ -1,0 +1,277 @@
+version: '2'
+services:
+  radarr:
+    image: ullbergm/radarr
+    hostname: radarr
+    environment:
+      PGID: ${PGID}
+      PUID: ${PUID}
+      TZ: ${TZ}
+    stdin_open: true
+    volumes:
+    - ${CONFIG_DIR}/radarr:/config
+    - ${MEDIA_DIR}/movie:/movies
+    - ${DOWNLOAD_DIR}:/downloads
+    tty: true
+    links:
+    - nzbget:nzbget
+    - nzbhydra:nzbhydra
+    - deluge:deluge
+    labels:
+      io.rancher.container.pull_image: always
+  sonarr:
+    image: ullbergm/sonarr
+    hostname: sonarr
+    environment:
+      PGID: ${PGID}
+      PUID: ${PUID}
+      TZ: ${TZ}
+    stdin_open: true
+    volumes:
+    - ${CONFIG_DIR}/sonarr:/config
+    - ${MEDIA_DIR}/tv:/tv
+    - ${DOWNLOAD_DIR}:/downloads
+    tty: true
+    links:
+    - nzbget:nzbget
+    - nzbhydra:nzbhydra
+    - deluge:deluge
+    labels:
+      io.rancher.container.pull_image: always
+  booksonic:
+    image: linuxserver/booksonic
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+    stdin_open: true
+    volumes:
+    - ${CONFIG_DIR}/booksonic:/config
+    - ${MEDIA_DIR}/audiobooks:/books
+    - ${MEDIA_DIR}/podcasts:/podcasts
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  embyserver:
+    image: emby/embyserver
+    hostname: embyserver
+    environment:
+      PGID: ${PGID}
+      PUID: ${PUID}
+      TZ: ${TZ}
+    stdin_open: true
+    volumes:
+    - ${CONFIG_DIR}/embyserver:/config
+    - ${MEDIA_DIR}:/data/media
+    tty: true
+    ports:
+    - 8096:8096/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  headphones:
+    image: linuxserver/headphones
+    hostname: headphones
+    environment:
+      PGID: ${PGID}
+      PUID: ${PUID}
+      TZ: ${TZ}
+    stdin_open: true
+    volumes:
+    - ${CONFIG_DIR}/headphones:/config
+    - ${MEDIA_DIR}/music:/music
+    - ${DOWNLOAD_DIR}:/downloads
+    tty: true
+    links:
+    - nzbget:nzbget
+    - nzbhydra:nzbhydra
+    - deluge:deluge
+    ports:
+    - 8181:8181/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  organizr:
+    image: lsiocommunity/organizr
+    stdin_open: true
+    volumes:
+    - ${CONFIG_DIR}/organizr:/config
+    tty: true
+    links:
+    - sonarr:sonarr
+    - embyserver:emby
+    - nzbget:nzbget
+    - radarr:radarr
+    - headphones:headphones
+    labels:
+      io.rancher.container.pull_image: always
+  mylar:
+    image: linuxserver/mylar
+    hostname: mylar
+    environment:
+      PGID: ${PGID}
+      PUID: ${PUID}
+      TZ: ${TZ}
+    stdin_open: true
+    volumes:
+    - ${CONFIG_DIR}/mylar:/config
+    - ${MEDIA_DIR}/comics:/comics
+    - ${DOWNLOAD_DIR}:/downloads
+    tty: true
+    links:
+    - nzbget:nzbget
+    - nzbhydra:nzbhydra
+    - deluge:deluge
+    labels:
+      io.rancher.container.pull_image: always
+  nzbhydra:
+    image: linuxserver/hydra
+    hostname: nzbhydra
+    environment:
+      PGID: ${PGID}
+      PUID: ${PUID}
+      TZ: ${TZ}
+    stdin_open: true
+    volumes:
+    - ${CONFIG_DIR}/nzbhydra:/config
+    - ${MEDIA_DIR}:/data/media
+    - ${DOWNLOAD_DIR}:/data/downloads
+    tty: true
+    links:
+    - nzbget:nzbget
+    labels:
+      io.rancher.container.pull_image: always
+  smokeping:
+    image: magicdude4eva/smokeping
+    environment:
+      TZ: ${TZ}
+    stdin_open: true
+    volumes:
+    - ${CONFIG_DIR}/smokeping/data:/data
+    - ${CONFIG_DIR}/smokeping/config:/config
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  deluge:
+    cap_add:
+    - NET_ADMIN
+    image: ullbergm/arch-delugevpn
+    environment:
+      VPN_ENABLED: 'yes'
+      VPN_USER: ${VPN_USER}
+      VPN_PASS: ${VPN_PASS}
+      VPN_PROV: ${VPN_PROV}
+      STRICT_PORT_FORWARD: ${VPN_STRICT_PORT_FORWARD}
+      ENABLE_PRIVOXY: 'yes'
+      LAN_NETWORK: ${VPN_LAN_NETWORK}
+      NAME_SERVERS: ${VPN_NAME_SERVERS}
+      UMASK: '0000'
+      PUID: ${PUID}
+      PGID: ${PGID}
+      VPN_REMOTE: ${VPN_REMOTE}
+      DEBUG: 'false'
+    stdin_open: true
+    volumes:
+    - ${MEDIA_DIR}:/media
+    - ${DOWNLOAD_DIR}:/data
+    - ${CONFIG_DIR}/deluge:/config
+    - /etc/localtime:/etc/localtime:ro
+    tty: true
+    links:
+    - sonarr:sonarr
+    - embyserver:emby
+    - radarr:radarr
+    ports:
+    - 8118:8118/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  nzbget:
+    image: ullbergm/nzbget
+    hostname: nzbget
+    environment:
+      PGID: ${PGID}
+      PUID: ${PUID}
+      TZ: ${TZ}
+    stdin_open: true
+    volumes:
+    - ${MEDIA_DIR}:${MEDIA_DIR}
+    - ${DOWNLOAD_DIR}:/downloads
+    - ${CONFIG_DIR}/nzbget:/config
+    tty: true
+    links:
+    - sonarr:sonarr
+    - embyserver:emby
+    - radarr:radarr
+    ports:
+    - 6789:6789/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  ubooquity:
+    image: linuxserver/ubooquity
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+    stdin_open: true
+    volumes:
+    - ${CONFIG_DIR}/ubooquity:/config
+    - ${MEDIA_DIR}/books:/books
+    - ${MEDIA_DIR}/comics:/comics
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  samba:
+    image: dperson/samba
+    hostname: rancher.ullberg.home
+    stdin_open: true
+    volumes:
+    - ${MEDIA_DIR}:/media
+    - ${DOWNLOAD_DIR}:/downloads
+    tty: true
+    ports:
+    - 137:137/udp
+    - 138:138/udp
+    - 139:139/tcp
+    - 445:445/tcp
+    command:
+    - -t
+    - EST5EDT
+    - -n
+    - -s
+    - books;/media/books;yes;yes;yes
+    - -s
+    - comics;/media/comics;yes;yes;yes
+    - -s
+    - movies;/media/movie;yes;yes;yes
+    - -s
+    - music;/media/music;yes;yes;yes
+    - -s
+    - podcasts;/media/podcasts;yes;yes;yes
+    - -s
+    - tv;/media/tv;yes;yes;yes
+    labels:
+      io.rancher.container.pull_image: always
+  frontend:
+    image: rancher/lb-service-haproxy:v0.7.5
+    ports:
+    - 80:80/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+  lazylibrarian:
+    image: linuxserver/lazylibrarian
+    hostname: lazylibrarian
+    environment:
+      PGID: ${PGID}
+      PUID: ${PUID}
+      TZ: ${TZ}
+    stdin_open: true
+    volumes:
+    - ${CONFIG_DIR}/lazylibrarian:/config
+    - ${MEDIA_DIR}/books:/books
+    - ${DOWNLOAD_DIR}:/downloads
+    tty: true
+    links:
+    - nzbget:nzbget
+    - nzbhydra:nzbhydra
+    - deluge:deluge
+    labels:
+      io.rancher.container.pull_image: always
