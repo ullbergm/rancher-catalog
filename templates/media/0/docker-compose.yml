@@ -250,7 +250,7 @@ services:
     labels:
       io.rancher.container.pull_image: always
   frontend:
-    image: rancher/lb-service-haproxy:v0.7.5
+    image: rancher/lb-service-haproxy:v0.7.9
     ports:
     - 80:80/tcp
   lazylibrarian:
