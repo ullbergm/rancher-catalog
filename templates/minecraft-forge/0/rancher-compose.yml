@@ -23,18 +23,6 @@
       default: 25565
       required: true
       type: "int"
-    - variable: "VERSION"
-      label: "Minecraft Version"
-      description: "Select the version of Minecraft server to run. Default is the latest available."
-      type: "enum"
-      default: LATEST
-      options:
-        - LATEST
-        - SNAPSHOT
-        - 1.11
-        - 1.8.9
-        - 1.7.10
-        - 1.6.4
     - variable: "DIFFICULTY"
       label: "Difficulty level"
       description: "Select the Minecraft difficulty level.  Default is normal"
