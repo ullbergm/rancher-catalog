@@ -1,7 +1,5 @@
 Minecraft:
   environment:
-    -
-      TYPE: FTB
     - EULA
     - DIFFICULTY
     - MODE
@@ -13,6 +11,7 @@ Minecraft:
     - MOTD
     - SEED
     - WORLD
+    - TYPE
     - FTB_SERVER_MOD
   tty: true
   image: itzg/minecraft-server

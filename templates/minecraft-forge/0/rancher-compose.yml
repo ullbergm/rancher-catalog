@@ -69,7 +69,7 @@
     - variable: "MOTD"
       label: "Description"
       description: "Description string for Minecraft server"
-      default: "A Minecraft server powered by Docker"
+      default: "Horizon Server"
       type: "string"
       required: true
     - variable: "WHITELIST"
@@ -95,9 +95,14 @@
     - variable: "VOLUME_DRIVER"
       description: "Name of Convoy Storage Pool, if one is used."
       type: "string"
+    - variable: "TYPE"
+      description: "Server type."
+      type: "string"
+      default: "FTB"
     - variable: "FTB_SERVER_MOD"
       description: "Name of FTB Server mod pack to run. (ex. FTBHorizonsIIIServer_1.0.0.zip)"
       type: "string"
+      default: "FTBHorizonsIIIServer_1.0.0.zip"
 Minecraft:
   scale: ${SCALE}
   health_check:
