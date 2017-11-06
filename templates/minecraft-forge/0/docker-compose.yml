@@ -1,5 +1,6 @@
 Minecraft:
   environment:
+    TYPE: 'FTB'
     - EULA
     - DIFFICULTY
     - MODE
@@ -12,7 +13,6 @@ Minecraft:
     - SEED
     - WORLD
     - FTB_SERVER_MOD
-    TYPE: 'FTB'
   tty: true
   image: itzg/minecraft-server
   stdin_open: true
