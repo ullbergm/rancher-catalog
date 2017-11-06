@@ -1,6 +1,7 @@
 Minecraft:
   environment:
-    TYPE: 'FTB'
+    -
+      TYPE: FTB
     - EULA
     - DIFFICULTY
     - MODE
