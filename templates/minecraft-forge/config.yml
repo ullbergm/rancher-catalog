@@ -1,0 +1,8 @@
+name: Minecraft-Forge
+description: |
+  Minecraft Forge server
+version: 1.0.0
+category: Games
+maintainer: Magnus Ullberg <magnus@ullberg.us>
+license: Apache 2.0
+projectURL: https://github.com/ullbergm/rancher-catalog
